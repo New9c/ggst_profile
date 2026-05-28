@@ -4,7 +4,7 @@ import path from 'node:path'
 import { getRankInfo, convertRating, displayRating, rankIconSvg } from './rank.js'
 
 const PUDDLE_SEARCH = 'https://puddle.farm/api/player/search?search_string='
-const RATING_ICON = fs.readFileSync(path.join(import.meta.dirname, 'RatingIcon.png'))
+const RATING_ICON = fs.readFileSync(path.join(import.meta.dirname, 'public', 'RatingIcon.png'))
 
 function escapeXml(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
