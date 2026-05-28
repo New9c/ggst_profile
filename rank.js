@@ -1,3 +1,10 @@
+import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const RATING_ICON_B64 = fs.readFileSync(join(__dirname, 'RatingIcon.png')).toString('base64')
+
 const RANK_THRESHOLDS = [
   { rating: 10001800, name: 'Vanquisher III Vindex', spriteX: 2, spriteY: 5, color: '#6820a0' },
   { rating: 10001700, name: 'Vanquisher II Virtus', spriteX: 1, spriteY: 5, color: '#9050d8' },
@@ -45,7 +52,7 @@ function rankIconSvg(rating, size = 64, x = 0, y = 0) {
   const vx = rank.spriteX * 256
   const vy = rank.spriteY * 256
   return `<svg x="${x}" y="${y}" width="${size}" height="${size}" viewBox="${vx} ${vy} 256 256">
-  <image href="/RatingIcon.png" width="1024" height="2048"/>
+  <image href="data:image/png;base64,${RATING_ICON_B64}" width="1024" height="2048"/>
 </svg>`
 }
 
