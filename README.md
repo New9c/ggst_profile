@@ -1,10 +1,9 @@
-create a site that that takes a name and creates a full profile svg
-input: name (mysite.com/{name} to get name)
+# GGST Profile
 
-use https://puddle.farm/api/player/search?search_string={name} to get the id, use the very first one
+A simple profile to show off your rank in strive.
 
-output: svg with the following
+This is possible thanks to [puddle farm](https://puddle.farm) and it's API.
 
-- name
-- rating
-- char_long
+## Usage
+
+Use `![ggst_profile](https://ggst.danew9c.com/DaNew9c)` on github
