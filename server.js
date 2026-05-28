@@ -4,12 +4,12 @@ import { getRankInfo, displayRating, rankIconSvg } from './rank.js'
 const PUDDLE_SEARCH = 'https://puddle.farm/api/player/search?search_string='
 
 function escapeXml(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }
 
 function svg(player) {
-  const rating = displayRating(player.rating)
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="480" height="240" viewBox="0 0 480 240">
+    const rating = displayRating(player.rating)
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="480" height="210" viewBox="0 0 480 210">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#262a2c"/>
@@ -24,35 +24,35 @@ function svg(player) {
 }
 
 const server = http.createServer(async (req, res) => {
-  const parsed = new URL(req.url, `http://${req.headers.host}`)
-  const pathname = parsed.pathname.replace(/^\/|\/$/g, '')
+    const parsed = new URL(req.url, `http://${req.headers.host}`)
+    const pathname = parsed.pathname.replace(/^\/|\/$/g, '')
 
-  if (!pathname) {
-    res.writeHead(400, { 'Content-Type': 'text/plain' })
-    res.end('provide a player name in the path')
-    return
-  }
+    if (!pathname) {
+        res.writeHead(400, { 'Content-Type': 'text/plain' })
+        res.end('Usage: /<name>, e.g. ggst.danew9c.com/DaNew9c')
+        return
+    }
 
-  try {
-    const searchRes = await fetch(PUDDLE_SEARCH + encodeURIComponent(pathname))
-    if (!searchRes.ok) {
-      res.writeHead(502, { 'Content-Type': 'text/plain' })
-      res.end('search api failed')
-      return
+    try {
+        const searchRes = await fetch(PUDDLE_SEARCH + encodeURIComponent(pathname))
+        if (!searchRes.ok) {
+            res.writeHead(502, { 'Content-Type': 'text/plain' })
+            res.end('search api failed')
+            return
+        }
+        const data = await searchRes.json()
+        if (!data.results || data.results.length === 0) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' })
+            res.end('player not found')
+            return
+        }
+        const player = data.results[0]
+        res.writeHead(200, { 'Content-Type': 'image/svg+xml' })
+        res.end(svg(player))
+    } catch (e) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' })
+        res.end('internal error')
     }
-    const data = await searchRes.json()
-    if (!data.results || data.results.length === 0) {
-      res.writeHead(404, { 'Content-Type': 'text/plain' })
-      res.end('player not found')
-      return
-    }
-    const player = data.results[0]
-    res.writeHead(200, { 'Content-Type': 'image/svg+xml' })
-    res.end(svg(player))
-  } catch (e) {
-    res.writeHead(500, { 'Content-Type': 'text/plain' })
-    res.end('internal error')
-  }
 })
 
 const PORT = parseInt(process.env.PORT || '3000', 10)
