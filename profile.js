@@ -10,13 +10,13 @@ function load(name) {
     const img = new Image()
     img.onload = () => { result.innerHTML = ''; result.appendChild(img) }
     img.onerror = () => { result.innerHTML = '<div class="error">Player not found</div>'; currentName = '' }
-    img.src = '/' + encodeURIComponent(name.trim())
+    img.src = '/api/player?name=' + encodeURIComponent(name.trim())
 }
 
 function downloadSvg() {
     if (!currentName) return
     const a = document.createElement('a')
-    a.href = '/' + encodeURIComponent(currentName)
+    a.href = '/api/player?name=' + encodeURIComponent(currentName)
     a.download = 'ggst_profile.svg'
     document.body.appendChild(a)
     a.click()

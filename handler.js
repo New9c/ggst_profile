@@ -49,16 +49,23 @@ function serveStatic(res, name) {
 
 export default async function handler(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}`)
-  const name = url.pathname.replace(/^\/|\/$/g, '')
+  const name = url.searchParams.get('name')
+  const pathname = url.pathname.replace(/^\/|\/$/g, '')
 
-  if (!name) {
+  if (!pathname) {
     const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf-8')
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.end(html)
     return
   }
 
-  if (serveStatic(res, name)) return
+  if (serveStatic(res, pathname)) return
+
+  if (!name) {
+    res.writeHead(400, { 'Content-Type': 'text/plain' })
+    res.end('missing name param')
+    return
+  }
 
   try {
     const searchRes = await fetch(PUDDLE_SEARCH + encodeURIComponent(name))
