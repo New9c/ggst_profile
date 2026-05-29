@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const RATING_ICON_B64 = fs.readFileSync(join(__dirname, 'RatingIcon.png')).toString('base64')
+const RATING_ICON_B64 = fs.readFileSync(join(__dirname, 'public', 'RatingIcon.png')).toString('base64')
 
 const RANK_THRESHOLDS = [
   { rating: 10001800, name: 'Vanquisher III Vindex', spriteX: 2, spriteY: 5, color: '#6820a0' },
