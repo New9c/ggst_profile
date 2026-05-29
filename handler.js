@@ -38,7 +38,7 @@ function serveStatic(res, name) {
   const ext = path.extname(name)
   if (!MIME[ext]) return false
   try {
-    const content = fs.readFileSync(path.join(__dirname, name))
+    const content = fs.readFileSync(path.join(__dirname, 'public', name))
     res.writeHead(200, { 'Content-Type': MIME[ext] })
     res.end(content)
     return true
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
   const pathname = url.pathname.replace(/^\/|\/$/g, '')
 
   if (!pathname) {
-    const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf-8')
+    const html = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf-8')
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.end(html)
     return
