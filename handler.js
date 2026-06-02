@@ -12,6 +12,7 @@ const MIME = {
     '.js': 'application/javascript',
     '.png': 'image/png',
     '.svg': 'image/svg+xml',
+    '.ico': 'image/x-icon',
 }
 
 function escapeXml(s) {
