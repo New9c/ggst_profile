@@ -21,13 +21,7 @@ function escapeXml(s) {
 function svg(player) {
   const rating = displayRating(player.rating)
   return `<svg xmlns="http://www.w3.org/2000/svg" width="480" height="210" viewBox="0 0 480 210">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#262a2c"/>
-      <stop offset="100%" stop-color="#262a2c"/>
-    </linearGradient>
-  </defs>
-  <rect width="480" height="210" fill="url(#bg)" rx="16"/>
+  <rect width="480" height="210" fill="#262a2c" rx="16"/>
   <text x="320" y="70" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="25" font-weight="bold" font-family="Arial, sans-serif">${escapeXml(player.name)}</text>
   ${rankIconSvg(player.rating, 140, 35, 35)}
   <text x="320" y="140" text-anchor="middle" dominant-baseline="central" fill="#fff" font-size="25" font-weight="bold" font-family="Arial, sans-serif">${rating} (${escapeXml(player.char_short)})</text>

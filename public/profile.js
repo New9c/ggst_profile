@@ -7,6 +7,7 @@ let currentName = ''
 function load(name) {
     if (!name.trim()) return
     currentName = name.trim()
+    result.innerHTML = '<div class="placeholder">Generating...</div>'
     const img = new Image()
     img.onload = () => { result.innerHTML = ''; result.appendChild(img) }
     img.onerror = () => { result.innerHTML = '<div class="error">Player not found</div>'; currentName = '' }
