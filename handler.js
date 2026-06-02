@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getRankInfo, displayRating, rankIconSvg } from './rank.js'
+import { displayRating, rankIconSvg } from './rank.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const PUDDLE_SEARCH = 'https://puddle.farm/api/player/search?search_string='

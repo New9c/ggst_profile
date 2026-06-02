@@ -24,7 +24,7 @@ function downloadSvg() {
     document.body.removeChild(a)
 }
 
-load("DaNew9c")
+load(input.value ? input.value : "DaNew9c")
 dlBtn.addEventListener('click', downloadSvg)
 create.addEventListener('click', () => load(input.value))
 input.addEventListener('keydown', e => { if (e.key === 'Enter') load(input.value) })
