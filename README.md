@@ -15,7 +15,7 @@ Simply go to [ggst.danew9c.com](https://ggst.danew9c.com) to check it out. <br>
 
 ## Running Locally
 ```sh
-git clone https://github.com/danew9c/ggst_profile
+git clone https://github.com/New9c/ggst_profile
 cd ggst_profile
 node server.js
 ```
